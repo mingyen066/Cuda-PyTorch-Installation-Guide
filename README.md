@@ -1,2 +1,2 @@
 # ML-toolkit-installer
-shell script install python cuda
+shell script that install python nvidia-driver cuda
