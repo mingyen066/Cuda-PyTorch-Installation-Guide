@@ -44,7 +44,7 @@ sudo -i dpkg libcudnn7-doc_7.6.2.24-1+cuda10.0_amd64.deb
 
 # verify cudnn is already is installed 
 ```bash
-CUDNN_H_PATH=/usr/include/cudnn.h \
+CUDNN_H_PATH=/usr/include/cudnn.h
 cat ${CUDNN_H_PATH} | grep CUDNN_MAJOR -A 2
 ```
 # Test Cudnn from libcudnn-doc
