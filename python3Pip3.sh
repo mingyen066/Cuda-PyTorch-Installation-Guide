@@ -9,9 +9,8 @@ sudo apt-get update
 echo >> ~/.bashrc 'alias python=python3.7'
 echo >> ~/.bashrc 'alias pip=pip3'
 source ~/.bashrc
-echo "now you can use python3.7 and pip3 by just typing python and pip repectively"
+echo "now you can use python3.7 and pip3 by directly typing python and pip repectively"
 
-sudo pip install --upgrade virtualenv
 pip install -r requirements.txt
 
 
