@@ -11,6 +11,6 @@ echo >> ~/.bashrc 'alias pip=pip3'
 source ~/.bashrc
 echo "now you can use python3.7 and pip3 by directly typing python and pip repectively"
 
-pip install -r requirements.txt
+sudo pip install -r requirements.txt
 
 
