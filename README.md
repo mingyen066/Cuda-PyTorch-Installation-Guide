@@ -1,7 +1,7 @@
 # ML-toolkit-installer
-set up guide for installing python3, pip3, nvidia-driver, cuda, and cuDNN
+set up guide for installing python3, pip3, nvidia-driver, cuda, and cuDNN from the new installed ubuntu
 
-## Pre-action
+## Prerequisite
 ```bash
 git clone https://github.com/mingyen066/ML-toolkit-installer.git
 cd ML-toolkit-installer
