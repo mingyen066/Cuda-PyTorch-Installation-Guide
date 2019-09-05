@@ -1,14 +1,20 @@
 # ML-toolkit-installer
 set up guide for installing python3, pip3, nvidia-driver, cuda, and cuDNN from the new installed ubuntu
 
-## Prerequisite
+# Prerequisite
 ```bash
 git clone https://github.com/mingyen066/ML-toolkit-installer.git
 cd ML-toolkit-installer
 sudo chmod +x *.sh
 ```
+* [Python](#Python) 
+* [Nvidia driver](#Nvidia-driver) 
+* [Cuda](#Cuda)
+    * [(Optional) Remove Cuda](#(Optional)-Remove-Cuda)
+    * [Install Cuda](#Install-Cuda)
+    * [Install Cudnn](#Install-Cudnn)
 
-## Python 
+# Python 
 You need to add module names (that you want to install) to requirements.txt, then run 
 ```bash
 ./python3Pip3.sh
@@ -16,7 +22,39 @@ You need to add module names (that you want to install) to requirements.txt, the
 After that, you can use python3 and pip3 by directly typing python and pip respectively. \
 Furthermore, the python packages that you want to get in requirements.txt are already installed.
 
-## (Optional) remove Cuda
+
+# Nvidia driver
+https://www.geforce.com.tw/drivers \
+Choose the driver which corresponding to you gpu, then install it.
+you can type
+```bash
+nvidia-smi
+```
+```bash
+Fri Sep  6 00:38:04 2019
++-----------------------------------------------------------------------------+
+| NVIDIA-SMI 435.21       Driver Version: 435.21       CUDA Version: 10.1     |
+|-------------------------------+----------------------+----------------------+
+| GPU  Name        Persistence-M| Bus-Id        Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp  Perf  Pwr:Usage/Cap|         Memory-Usage | GPU-Util  Compute M. |
+|===============================+======================+======================|
+|   0  GeForce RTX 2070    Off  | 00000000:01:00.0 Off |                  N/A |
+| 38%   39C    P0    42W / 185W |      0MiB /  7979MiB |      0%      Default |
++-------------------------------+----------------------+----------------------+
+|   1  GeForce RTX 2070    Off  | 00000000:02:00.0 Off |                  N/A |
+| 38%   36C    P0     1W / 185W |      0MiB /  7982MiB |      0%      Default |
++-------------------------------+----------------------+----------------------+
+
++-----------------------------------------------------------------------------+
+| Processes:                                                       GPU Memory |
+|  GPU       PID   Type   Process name                             Usage      |
+|=============================================================================|
+|  No running processes found                                                 |
++-----------------------------------------------------------------------------+
+```
+to check whether you have already installed graphic driver
+# Cuda 
+# (Optional) Remove Cuda
 ```bash
 sudo apt-get remove cuda
 ```
@@ -33,17 +71,12 @@ you can remove totally it by
 ```bash
 sudo rm -r /usr/local/cuda*
 ```
-
-## Cuda 
+# Install Cuda 
 https://developer.nvidia.com/cuda-toolkit-archive \
 Choose the cuda version that you want to install (say, 10.0), and assume the machine environment is Ubuntu18.04.\
-I recommend install cuda by local runfile because it has good command-line prompts that can help you to install nvidia driver, install cuda, and set PATH environment for cuda automatically. \
-If you have already installed nvidia graphic driver (>480), you can skip it.
-you can type
-```bash
-nvidia-smi
-```
-to check whether you have already installed graphic driver
+I recommend install cuda by local runfile because it has good command-line prompts that can help you to install install cuda, and set PATH environment for cuda automatically. \
+**DO NOT INSTALL nvidia driver via cuda debian file because it usually leads installation problem.**
+
 
 ## Add Cuda to Path
 you can **either** append two lines of code below into ~/.bashrc
@@ -68,18 +101,19 @@ nvcc -V
 you can see the response:
 ```bash
 nvcc: NVIDIA (R) Cuda compiler driver
-Copyright (c) 2005-2019 NVIDIA Corporation
-Built on Wed_Apr_24_19:10:27_PDT_2019
-Cuda compilation tools, release 10.1, V10.1.168
+Copyright (c) 2005-2018 NVIDIA Corporation
+Built on Sat_Aug_25_21:08:01_CDT_2018
+Cuda compilation tools, release 10.0, V10.0.130
 ```
 
-## Cudnn
+# Install Cudnn
 https://developer.nvidia.com/rdp/cudnn-download \
-After you download all three files, you can use for example:
+After you download all three files, you can install them via: \
+(You cannot download these files by curl or wget because nvidia needs users to login)
 ```bash
-sudo -i dpkg libcudnn7_7.6.2.24-1+cuda10.0_amd64.deb
-sudo -i dpkg libcudnn7-dev_7.6.2.24-1+cuda10.0_amd64.deb
-sudo -i dpkg libcudnn7-doc_7.6.2.24-1+cuda10.0_amd64.deb
+sudo dpkg -i libcudnn7_7.6.2.24-1+cuda10.0_amd64.deb
+sudo dpkg -i libcudnn7-dev_7.6.2.24-1+cuda10.0_amd64.deb
+sudo dpkg -i libcudnn7-doc_7.6.2.24-1+cuda10.0_amd64.deb # not requirement, doc is for verify installation
 ```
 
 ## Verify Cudnn is already is installed 
