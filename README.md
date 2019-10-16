@@ -17,7 +17,7 @@ sudo chmod +x *.sh
 # Python 
 You need to add module names (that you want to install) to requirements.txt, then run 
 ```bash
-./python3Pip3.sh
+./install_python_pip.sh
 ```
 After that, you can use python3 and pip3 by directly typing python and pip respectively. \
 Furthermore, the python packages that you want to get in requirements.txt are already installed.

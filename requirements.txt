@@ -3,3 +3,5 @@ numpy
 sklearn
 jupyterlab
 matplotlib
+scipy
+tqdm
