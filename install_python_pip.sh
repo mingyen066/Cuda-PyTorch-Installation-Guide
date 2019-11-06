@@ -10,8 +10,8 @@ sudo apt-get update
 echo >> ~/.bashrc 'alias python=python3.7'
 echo >> ~/.bashrc 'alias pip=pip3.7'
 source ~/.bashrc
-echo "now you can use python3.7 and pip3 by directly typing python and pip repectively"
+echo "After restarting your shell, you can use python3.7 and pip3 by directly typing python and pip repectively"
 
-pip install --user -r requirements.txt
+pip3.7 install --user -r requirements.txt
 
 

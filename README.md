@@ -1,5 +1,5 @@
 # ML-toolkit-installer
-set up guide for installing python3, pip3, nvidia-driver, cuda, and cuDNN from the new installed ubuntu
+A setup guide for installing python3, pip3, nvidia-driver, cuda, and cuDNN from the new installed ubuntu
 
 # Prerequisite
 ```bash
@@ -15,18 +15,18 @@ sudo chmod +x *.sh
     * [Install Cudnn](#Install-Cudnn)
 
 # Python 
-You need to add module names (that you want to install) to requirements.txt, then run 
+You may want to add additional module names that will be installed to requirements.txt, then run 
 ```bash
 ./install_python_pip.sh
 ```
-After that, you can use python3 and pip3 by directly typing python and pip respectively. \
+After restarting your shell, you can use python3 and pip3 by directly typing python and pip respectively. \
 Furthermore, the python packages that you want to get in requirements.txt are already installed.
 
 
 # Nvidia driver
 https://www.geforce.com.tw/drivers \
 Choose the driver which corresponding to you gpu, then install it.
-you can type
+You can type
 ```bash
 nvidia-smi
 ```
@@ -62,7 +62,7 @@ sudo apt-get remove cuda
 sudo apt-get remove cuda-XX-YY
 sudo apt-get autoremove
 ```
-for example if you installed cuda 10.1, then you type
+For example, if you installed cuda 10.1, then you type
 ```bash
 sudo apt-get remove cuda-10-1
 ```
@@ -74,17 +74,18 @@ sudo rm -r /usr/local/cuda*
 # Install Cuda 
 https://developer.nvidia.com/cuda-toolkit-archive \
 Choose the cuda version that you want to install (say, 10.0), and assume the machine environment is Ubuntu18.04.\
-I recommend install cuda by local runfile because it has good command-line prompts that can help you to install install cuda, and set PATH environment for cuda automatically. \
-**DO NOT INSTALL nvidia driver via cuda debian file because it usually leads installation problem.**
+I recommend install cuda by local runfile because it has good command-line prompts that can help you to install cuda, and set PATH environment for cuda automatically. \
+**DO NOT INSTALL nvidia graphic driver via cuda installation file because we have already done in the previous step**
+**I have tried to install graphic driver via cuda installation file but it usually leads installation problem.**
 
 
 ## Add Cuda to Path
-you can **either** append two lines of code below into ~/.bashrc
+You can **either** append two lines of code below into ~/.bashrc
 ```bash
 export PATH=/usr/local/cuda/bin:$PATH
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/cuda/lib64
 ```
-then type the command below in the bash
+then type the command below into the bash
 ```bash
 source ~/.bashrc
 ```
@@ -98,7 +99,7 @@ By just type command below
 ```bash
 nvcc -V
 ```
-you can see the response:
+You can see the response:
 ```bash
 nvcc: NVIDIA (R) Cuda compiler driver
 Copyright (c) 2005-2018 NVIDIA Corporation

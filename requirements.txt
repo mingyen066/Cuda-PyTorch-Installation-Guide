@@ -5,3 +5,4 @@ jupyterlab
 matplotlib
 scipy
 tqdm
+pandas
