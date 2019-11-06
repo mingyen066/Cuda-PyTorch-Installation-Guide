@@ -23,13 +23,15 @@ After restarting your shell, you can use python3 and pip3 by directly typing pyt
 Furthermore, the python packages that you want to get in requirements.txt are already installed.
 
 
-# Nvidia driver
+# Nvidia Graphics Driver
 https://www.geforce.com.tw/drivers \
-Choose the driver which corresponding to you gpu, then install it.
+Choose the driver which corresponding to your gpu, then install it.
 You can type
 ```bash
 nvidia-smi
 ```
+to check whether you have already installed graphic driver. \
+You can see the response, like this:
 ```bash
 Fri Sep  6 00:38:04 2019
 +-----------------------------------------------------------------------------+
@@ -52,7 +54,7 @@ Fri Sep  6 00:38:04 2019
 |  No running processes found                                                 |
 +-----------------------------------------------------------------------------+
 ```
-to check whether you have already installed graphic driver
+
 # Cuda 
 # (Optional) Remove Cuda
 ```bash
@@ -73,10 +75,13 @@ sudo rm -r /usr/local/cuda*
 ```
 # Install Cuda 
 https://developer.nvidia.com/cuda-toolkit-archive \
-Choose the cuda version that you want to install (say, 10.0), and assume the machine environment is Ubuntu18.04.\
-I recommend install cuda by local runfile because it has good command-line prompts that can help you to install cuda, and set PATH environment for cuda automatically. \
-**DO NOT INSTALL nvidia graphic driver via cuda installation file because we have already done in the previous step**
-**I have tried to install graphic driver via cuda installation file but it usually leads installation problem.**
+Choose the cuda version that you want to install (say, 10.1), and assume the machine environment is Ubuntu18.04.\
+I recommend install cuda by runfile (local) because it has good command-line prompts that can help you to install cuda, and set PATH environment for cuda automatically. \
+**While you are installing cuda, a prompt will be displayed, asking you whether to install "Driver", "CUDA Toolkit", "CUDA Samples",...** \
+**The "Driver" here means "Nvidia Graphics Driver"** \
+**Since we have already installed Driver in the previous step,** \
+**DO NOT install Driver(i.e., unselect Driver) while running cuda installation runfile.** \
+**(I have tried to install Driver via cuda installation runfile but it usually leads to installation problem.)**
 
 
 ## Add Cuda to Path
