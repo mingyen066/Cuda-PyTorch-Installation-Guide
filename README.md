@@ -1,7 +1,7 @@
 # ML-toolkit-installer
 A setup guide for installing python3, pip3, nvidia-driver, cuda, and cuDNN from the new installed ubuntu
 
-# Prerequisite
+# Prerequisite (If Python3 is not installed yet)
 ```bash
 git clone https://github.com/mingyen066/ML-toolkit-installer.git
 cd ML-toolkit-installer
@@ -19,9 +19,12 @@ You may want to add additional module names that will be installed to requiremen
 ```bash
 ./install_python_pip.sh
 ```
-After restarting your shell, you can use python3 and pip3 by directly typing python and pip respectively. \
-Furthermore, the python packages that you want to get in requirements.txt are already installed.
-
+**After restarting your shell**, you can use python3 and pip3 by directly typing python and pip respectively. \
+Furthermore, the python packages added to requirements.txt are already installed.
+If you want to make a hard link to make sure there is no python path problem in shell script, you can type the command:
+```bash
+ln /usr/bin/python /usr/bin/python3.7
+```
 
 # Nvidia Graphics Driver
 https://www.geforce.com.tw/drivers \
@@ -81,11 +84,11 @@ For example:
 chmod u+x cuda_10.2.89_440.33.01_linux.run
 sudo ./cuda_10.2.89_440.33.01_linux.run
 ```
-**While you are installing cuda, a prompt will be displayed, asking you whether to install "Driver", "CUDA Toolkit", "CUDA Samples",...** \
-**The "Driver" here means "Nvidia Graphics Driver"** \
-**Since we have already installed Driver in the previous step,** \
+While you are installing cuda, a prompt will be displayed, asking you whether to install "Driver", "CUDA Toolkit", "CUDA Samples",... \
+The "Driver" here means "Nvidia Graphics Driver" \
+Since we have already installed Driver in the previous step, \
 **do NOT install Driver (i.e., unselect Driver) while running cuda installation runfile.** \
-**(I have tried to install Driver via cuda installation runfile but it usually leads to installation problem.)**
+(I have tried to install Driver via cuda installation runfile but it usually leads to installation problem.)
 
 
 ## Add Cuda to Path
