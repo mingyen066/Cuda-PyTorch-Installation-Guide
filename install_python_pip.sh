@@ -4,7 +4,9 @@ xz-utils tk-dev libffi-dev liblzma-dev python-openssl git vim gcc g++
 sudo add-apt-repository -y ppa:deadsnakes/ppa
 sudo apt-get update
 sudo apt-get install python3.7
+sudo apt-get install python3-pip
 sudo python3.7 -m pip install --upgrade pip
+sudo update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.7 1
 sudo apt-get update
 
 echo >> ~/.bashrc 'alias python=python3.7'
