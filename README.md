@@ -1,98 +1,101 @@
-# ML-toolkit-installer
-A setup guide for installing python3, pip3, nvidia-driver, cuda, and cuDNN from the new installed ubuntu
+# Cuda and Torch installation guide
+A setup guide for installing python, nvidia-driver, cuda, cuDNN, and Pytorch from the new installed ubuntu
 
-# Prerequisite (If Python3 is not installed yet)
-```bash
-git clone https://github.com/mingyen066/ML-toolkit-installer.git
-cd ML-toolkit-installer
-sudo chmod +x *.sh
-```
+
 * [Python](#Python) 
 * [Nvidia driver](#Nvidia-driver) 
 * [Cuda](#Cuda)
     * [(Optional) Remove Cuda](#(Optional)-Remove-Cuda)
     * [Install Cuda](#Install-Cuda)
     * [Install Cudnn](#Install-Cudnn)
-
+* [Pytorch](#Pytorch)
+    * [Install PyTorch by pip](#Install-PyTorch-by-pip)
+    * [Check whether PyTorch is installed](#Check-whether-PyTorch-is-installed)
+    
 # Python 
-You may want to add additional module names that will be installed to requirements.txt, then run 
-```bash
-./install_python_pip.sh
+Make a hard link to ensure that you use python3 as a default python, and there is no python path problem while running shell script.
 ```
-**After restarting your shell**, you can use python3 and pip3 by directly typing python and pip respectively. \
-Furthermore, the python packages added to requirements.txt are already installed.
-If you want to make a hard link to make sure there is no python path problem in shell script, you can type the command:
+sudo rm -rf /usr/bin/python
+sudo ln /usr/bin/python3 /usr/bin/python
+```
+## Get Python-pip
 ```bash
-ln /usr/bin/python /usr/bin/python3.7
+sudo apt-get install python3-pip
+python3 -m pip install --upgrade pip
 ```
 
 # Nvidia Graphics Driver
 https://www.geforce.com.tw/drivers \
-Choose the driver which corresponding to your gpu, then install it.
-You can type
+Choose and download the driver which corresponding to your gpu, then install it. \
+For example:
+```bash
+sudo sh NVIDIA-Linux-x86_64-440.82.run
+```
+If you meet Nouveau kernel problem, please type these 2 command to blackout nouveau:
+```bash
+$ sudo bash -c "echo blacklist nouveau > /etc/modprobe.d/blacklist-nvidia-nouveau.conf"
+$ sudo bash -c "echo options nouveau modeset=0 >> /etc/modprobe.d/blacklist-nvidia-nouveau.conf"
+```
+After you finish the installation process, you can type
 ```bash
 nvidia-smi
 ```
 to check whether you have already installed graphic driver. \
 You can see the response, like this:
 ```bash
-Thu Feb 13 13:45:42 2020       
+Tue Apr 28 15:24:34 2020       
 +-----------------------------------------------------------------------------+
-| NVIDIA-SMI 440.33.01    Driver Version: 440.33.01    CUDA Version: 10.2     |
+| NVIDIA-SMI 440.82       Driver Version: 440.82       CUDA Version: 10.2     |
 |-------------------------------+----------------------+----------------------+
 | GPU  Name        Persistence-M| Bus-Id        Disp.A | Volatile Uncorr. ECC |
 | Fan  Temp  Perf  Pwr:Usage/Cap|         Memory-Usage | GPU-Util  Compute M. |
 |===============================+======================+======================|
 |   0  GeForce GTX 1080    Off  | 00000000:01:00.0 Off |                  N/A |
-| 32%   49C    P5     9W / 180W |    629MiB /  8119MiB |     18%      Default |
+| 26%   38C    P0    35W / 180W |      0MiB /  8119MiB |      0%      Default |
 +-------------------------------+----------------------+----------------------+
                                                                                
 +-----------------------------------------------------------------------------+
 | Processes:                                                       GPU Memory |
 |  GPU       PID   Type   Process name                             Usage      |
 |=============================================================================|
-|    0      1256      G   /usr/lib/xorg/Xorg                           371MiB |
-|    0      1740      G   ...quest-channel-token=4107256176665617484    92MiB |
-|    0      2424      G   compiz                                       162MiB |
+|  No running processes found                                                 |
 +-----------------------------------------------------------------------------+
 ```
 
 # Cuda 
-# (Optional) Remove Cuda
+## (Optional) Remove Cuda
 ```bash
-sudo apt-get remove cuda
+sudo apt-get purge cuda
 ```
 ```bash
-sudo apt-get remove cuda-XX-YY
+sudo apt-get purge cuda-XX-YY
 sudo apt-get autoremove
 ```
 For example, if you installed cuda 10.1, then you type
 ```bash
-sudo apt-get remove cuda-10-1
+sudo apt-get purge cuda-10-1
 ```
 maybe there are some other versions of cuda in /usr/local/
-you can remove totally it by
+you can remove all of it by
 ```bash
 sudo rm -r /usr/local/cuda*
 ```
-# Install Cuda 
+## Install Cuda 
 https://developer.nvidia.com/cuda-toolkit-archive \
-Choose the cuda version that you want to install (say, 10.1), and assume the machine environment is Ubuntu18.04.\
+Choose the cuda version that you want to install (say, 10.2), and assume the machine environment is Ubuntu 18.04.\
 I recommend install cuda by **runfile (local)** because it has good command-line prompts that can help you to install cuda, and set PATH environment for cuda automatically. \
 For example:
 ```bash
-chmod u+x cuda_10.2.89_440.33.01_linux.run
-sudo ./cuda_10.2.89_440.33.01_linux.run
+sudo sh cuda_10.2.89_440.33.01_linux.run
 ```
 While you are installing cuda, a prompt will be displayed, asking you whether to install "Driver", "CUDA Toolkit", "CUDA Samples",... \
 The "Driver" here means "Nvidia Graphics Driver" \
-Since we have already installed Driver in the previous step, \
-**do NOT install Driver (i.e., unselect Driver) while running cuda installation runfile.** \
+Since we have already installed Driver in the previous step, **do NOT install Driver (i.e., unselect Driver) while running cuda installation runfile.** \
 (I have tried to install Driver via cuda installation runfile but it usually leads to installation problem.)
 
 
-## Add Cuda to Path
-Type the command into bash which appends two lines of code into ~/.bashrc to get cuda path
+### Add Cuda to Path
+Type the command below, which appends two lines of code into ~/.bashrc to get cuda path
 ```bash
 echo >> ~/.bashrc '
 export PATH=/usr/local/cuda/bin:$PATH
@@ -104,7 +107,7 @@ source ~/.bashrc
 ```
 
 
-## Verify Cuda is already is installed 
+### Check whether Cuda is installed
 By just type command below 
 ```bash
 nvcc -V
@@ -117,17 +120,17 @@ Built on Wed_Oct_23_19:24:38_PDT_2019
 Cuda compilation tools, release 10.2, V10.2.89
 ```
 
-# Install Cudnn
+## Install Cudnn
 https://developer.nvidia.com/rdp/cudnn-download \
 After you download all three files, you can install them via: \
 (You cannot download these files by curl or wget because nvidia needs users to login)
 ```bash
 sudo dpkg -i libcudnn7_7.6.5.32-1+cuda10.2_amd64.deb
 sudo dpkg -i libcudnn7-dev_7.6.5.32-1+cuda10.2_amd64.deb
-sudo dpkg -i libcudnn7-doc_7.6.5.32-1+cuda10.2_amd64.deb # not requirement, doc is for verify installation
+sudo dpkg -i libcudnn7-doc_7.6.5.32-1+cuda10.2_amd64.deb # not requirement, doc is for verifying installation
 ```
 
-## Verify Cudnn is already is installed 
+### Check whether CuDNN is installed
 type in command below
 ```bash
 CUDNN_H_PATH=/usr/include/cudnn.h
@@ -145,7 +148,7 @@ you can see the response:
 ```
 which means you are using CuDNN 7.6.5
 
-## Test Cudnn via mnist training example
+### Test Cudnn via mnist training example
 If you installed libcudnn-doc, you can exploit mnist examples from doc to verify whether cudnn is installed correctly.
 ```bash
 cd /usr/src/cudnn_samples_v7/mnistCUDNN
@@ -154,3 +157,19 @@ sudo make
 ./mnistCUDNN
 ```
 
+# PyTorch
+## Install PyTorch by pip
+```bash
+pip install torch torchvision
+```
+
+## Check whether PyTorch is installed
+```bash
+$ python
+Python 3.6.9 (default, Apr 18 2020, 01:56:04) 
+[GCC 8.4.0] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+>>> import torch
+>>> torch.cuda.is_available()
+True
+```
